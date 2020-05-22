@@ -62,6 +62,12 @@
           <%= bootstrap_flash %>
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
+          <% if user_signed_in? %>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+            <li><%= link_to "ユーザー情報変更", edit_user_registration_path %></li>
+            <% else %>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+          <% end %>
           <%= yield %>
         </div>
         <div class="col-lg-3">
