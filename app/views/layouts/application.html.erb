@@ -48,9 +48,12 @@
         <a class="navbar-brand" href="#">Myapp</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Link1", "/"  %></li>
-            <li><%= link_to "Link2", "/"  %></li>
-            <li><%= link_to "Link3", "/"  %></li>
+            <% if user_signed_in? %>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to "ユーザー情報変更", edit_user_registration_path %></li>
+              <% else %>
+              <li><%= link_to "ログイン", new_user_session_path %></li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -62,12 +65,6 @@
           <%= bootstrap_flash %>
           <p class="notice"><%= notice %></p>
           <p class="alert"><%= alert %></p>
-          <% if user_signed_in? %>
-            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-            <li><%= link_to "ユーザー情報変更", edit_user_registration_path %></li>
-            <% else %>
-            <li><%= link_to "ログイン", new_user_session_path %></li>
-          <% end %>
           <%= yield %>
         </div>
         <div class="col-lg-3">
